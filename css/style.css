@@ -1,20 +1,70 @@
-body {
-    font-family: sans-serif;
-}
 
-html, .fullscreen {
-    display: flex;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.container {
-    margin: auto;
-}
-
-.title {
-    font-size: 3rem;
-}
-
+         body {
+             font-family: Arial, sans-serif;
+             margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             background: linear-gradient(135deg, #1e3c72, #2a5298);
+             color: white;
+         }
+         .container {
+             background: rgba(255, 255, 255, 0.1);
+             padding: 20px;
+             border-radius: 10px;
+             backdrop-filter: blur(10px);
+             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+             text-align: center;
+             width: 90%;
+             max-width: 500px;
+         }
+         .cabecalho {
+             margin-bottom: 20px;
+         }
+         .title {
+             font-size: 24px;
+             font-weight: bold;
+         }
+         .cont button {
+             background: #ff9800;
+             border: none;
+             padding: 10px 20px;
+             margin: 5px;
+             border-radius: 5px;
+             cursor: pointer;
+             color: white;
+             font-size: 16px;
+             transition: 0.3s;
+         }
+         .cont button:hover {
+             background: #e68900;
+         }
+         .contGeo {
+             margin-top: 20px;
+         }
+         input {
+             padding: 8px;
+             border: none;
+             border-radius: 5px;
+             margin-top: 5px;
+         }
+         .botao {
+             background: #4caf50;
+             border: none;
+             padding: 10px 20px;
+             margin: 5px;
+             border-radius: 5px;
+             cursor: pointer;
+             color: white;
+             font-size: 16px;
+             transition: 0.3s;
+         }
+         .botao:hover {
+             background: #45a049;
+         }
+         .rodape {
+             margin-top: 20px;
+             font-size: 14px;
+         }
