@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
             reg = await navigator.serviceWorker.register('/sw.js', {type: "module"})
             console.log('Service Worker Registrada! 👌', reg)
         }catch (err) {
-            console,log('Registro de Service Worker falhou 🤣', err)
+            console.log('Registro de Service Worker falhou 🤣', err)
         }
     })
 }
@@ -13,12 +13,12 @@ if ('serviceWorker' in navigator) {
 let posicaoInicial;
 const capturarLocalizacao = document.getElementById('localizacao')
 const latitude = document.getElementById('latitude')
-const longitude =document.getElementById('longiude')
+const longitude =document.getElementById('longitude')
 
 const sucesso = (posicao) => {
     posicaoInicial = posicao;
-    latitude.innerHTML = posicaoInicial.coords.latitude
-    longitude.innerHTML = posicaoInicial.coords.longitude
+    latitude.innerHTML = posicaoInicial.coords.latitude;
+    longitude.innerHTML = posicaoInicial.coords.longitude;
 }
 
 const erro = (error) => {
@@ -43,9 +43,11 @@ const erro = (error) => {
 capturarLocalizacao.addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition(sucesso, erro)
 })
-// window.onload = () => {
-//     "use strict";
-//     if("serviceWorker" in navigator){
-//         navigator.serviceWorker.register("./sw.js");
-//     }
-// };
+
+
+window.onload = () => {
+    "use strict";
+    if("serviceWorker" in navigator){
+        navigator.serviceWorker.register("./sw.js");
+    }
+};

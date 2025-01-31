@@ -1,4 +1,4 @@
-import {warmStrategyCache} from 'workbox-recipes';
+import {warmStrategyCache, offlineFallback} from 'workbox-recipes';
 import {CacheFirst, StaleWhileRevalidate} from 'workbox-strategies'
 import {registerRoute, Route} from 'workbox-routing'
 import {CacheableResponsePlugin} from 'workbox-cacheable-response'
@@ -52,23 +52,24 @@ const imageRoute = new Route(({request}) => {
   ]
 }))
 registerRoute(imageRoute)
-// let cacheName = "pwa_final";
-// let filesToCache = ["/", "/index", 
-//                 "/css/style.css", "/js/main.js"];
 
-// self.addEventListener("install", (e) => {
-//   e.waitUntil(
-//     caches.open(cacheName).then(function (cache) {
-//       return cache.addAll(filesToCache);
-//     })
-//   );
-// });
+let cacheName = "pwa_final";
+let filesToCache = ["/", "/index", 
+                "/css/style.css", "/js/main.js"];
 
-// self.addEventListener("fetch", (e) => {
-//   e.respondWith(
-//     caches.match(e.request).then((response) => {
-//       return response || fetch(e.request);
-//     })
-//   );
-// });
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches.open(cacheName).then(function (cache) {
+      return cache.addAll(filesToCache);
+    })
+  );
+});
+
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => {
+      return response || fetch(e.request);
+    })
+  );
+});
 

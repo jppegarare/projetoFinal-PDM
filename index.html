@@ -17,9 +17,18 @@
             <h1 class="title">Trabalho Final PDM</h1>
         </header>
         <div class="cont">
-            <h2>Geolocalização</h2>
+            
+            <div>
+                <button id="btnSalvar">Salvar</button>
+                <button id="btnListar">Listar</button>
+            </div>
+
+            <div>
+                <output></output>
+            </div>
 
             <div class="contGeo">
+                <h2>Geolocalização</h2>
                 <p>
                     Latitude: <span id="latitude">0.0</span>
                 </p>
@@ -30,6 +39,7 @@
                     <button class="botao" id="localizacao">capturar local</button>
                 </div>
             </div>
+
         </div>
         <footer class="rodape">
             Progressive Web Aplication - MusicOFF
@@ -37,6 +47,7 @@
     </section>
 
     <script src="js/main.js"></script>
+    <script src="js/db.js"></script>
 </body>
 
 </html>
