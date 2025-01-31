@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
     <meta charset="utf-8" />
     <title>PWA Final</title>
@@ -9,53 +8,46 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="white" />
-</head>
 
+    <script type="module" src="js/db.js"></script>
+    <script  src="js/main.js" defer></script>
+</head>
 <body class="fullscreen">
     <section class="container">
         <header class="cabecalho">
             <h1 class="title">Trabalho Final PDM</h1>
         </header>
         <div class="cont">
-            <p>Múscica: <input id="music" type="text"></p>
+            <p>Música: <input id="music" type="text"></p>
+            <div class="contGeo">
+                <h2>Local do Clipe</h2>
+                <p>
+                    Latitude: <input id="latMusic" type="number" title="Latitude" />
+                </p>
+                <p>
+                    Longitude: <input id="longMusic" type="number" title="Longitude" />
+                </p>
+                <p>
+                    Latitude Atual: <span id="latitude">0.0</span>
+                </p>
+                <p>
+                    Longitude Atual: <span id="longitude">0.0</span>
+                </p>
+                <div>
+                    <button class="botao" id="localizacao">Capturar Local</button>
+                </div>
+            </div>
             <div>
                 <button id="btnSalvar">Salvar</button>
                 <button id="btnListar">Listar</button>
             </div>
-
             <div>
                 <output></output>
             </div>
-
-            <div class="contGeo">
-                <h2>Geolocalização</h2>
-                <p>
-                   Latitude: <input id="latMusic" type="number" title="Latitude">
-                </p>
-                <p>
-                   Longitude: <input id="longMusic" type="numer" title="Longitude">
-                </p>
-
-
-                <p>
-                    Latitude: <span id="latitude">0.0</span>
-                </p>
-                <p>
-                    Longitude: <span id="longitude">0.0</span>
-                </p>
-                <div>
-                    <button class="botao" id="localizacao">capturar local</button>
-                </div>
-            </div>
-
         </div>
         <footer class="rodape">
-            Progressive Web Aplication - MusicOFF
+            Progressive Web Application - MusicOFF
         </footer>
     </section>
-
-    <script src="js/main.js"></script>
-    <script src="js/db.js"></script>
 </body>
-
 </html>

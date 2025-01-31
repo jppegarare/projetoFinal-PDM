@@ -5,54 +5,58 @@ let db;
 async function createDB() {
     try{
         db = await openDB('banco', 1, {
-            upgrade(db, oldVersion, newVersion, transaction){
-                switch (oldVersion){
-                    case 0:
-                    case 1:
-                        const store = db.createObjectStore('pessoas', {
-                            keyPath: 'nome'
-                        })
-                        store.createIndex('id', 'id')
-                        showResult("Banco de dados criado")  
+            upgrade(db) {
+                if (!db.objectStoreNames.contains('musicas')) {
+                    const store = db.createObjectStore('musicas', { keyPath: 'id', autoIncrement: true });
+                    store.createIndex('nome', 'nome');
                 }
             }
-        })
-        showResult("Banco de dados aberto.")
-    } catch(e){
-        showResult("Erro ao criar banco" + e.message)
+        });
+        console.log("Banco de dados criado.");
+    } catch (e) {
+        console.error("Erro ao criar banco:", e.message)
     }
 }
 
-window.addEventListener("DOMContentLoaded", async event =>{
-    createDB();
-    document.getElementById("input");
-    document.getElementById("btnSalvar").addEventListener("click", addData);
-    document.getElementById("btnListar").addEventListener("click", getData);
-})
-
-async function addData() {
-    const tx = await db.transaction('pessoas', 'redwrite', )
-    const store = tx.objectStore('pessoas')
-    store.add({name: 'Fulano'})
-    await tx.done;
-}
-
-async function getData() {
-    if (db == undefined){
-        showResult("Banco fechado")
-        return
-    }
-
-    const tx = await db.transaction('pessoas', 'readonly', )
-    const store = tx.objectStore('pessoas')
-    const value = await store.getAll()
-    if (value){
-        showResult("Dados do banco:  " + JSON.stringify(value))
+window.addEventListener("DOMContentLoaded", async () => {
+    await createDB();
+    if(db){
+    document.getElementById("btnSalvar").addEventListener("click", addMusic)
+    document.getElementById("btnListar").addEventListener("click", listMusic);
     }else{
-        showResult("Não há dados")
+        console.error("Banco não carregou")
     }
+});
+
+async function addMusic() {
+    const nome = document.getElementById("music").value.trim()
+    const latitude = document.getElementById("latMusic").value.trim()
+    const longitude = document.getElementById("longMusic").value.trim()
+
+    if (!nome || !latitude || !longitude) {
+        alert("Por favor, preencha todos os campos.")
+        return;
+    }
+
+    const tx = db.transaction('musicas', 'readwrite')
+    const store = tx.objectStore('musicas')
+    await store.add({ nome, latitude, longitude })
+    await tx.done
+
+    alert("Música salva com sucesso!")
 }
 
-function showResult(text){
-    document.querySelector("output").innerHTML = text
+async function listMusic() {
+    const tx = db.transaction('musicas', 'readonly')
+    const store = tx.objectStore('musicas')
+    const musicas = await store.getAll()
+
+    const output = document.querySelector("output")
+    if (musicas.length > 0) {
+        output.innerHTML = musicas.map(m => `
+            <p>Música: ${m.nome}, Latitude: ${m.latitude}, Longitude: ${m.longitude}</p>
+        `).join('')
+    } else {
+        output.innerHTML = "Nenhuma música salva."
+    }
 }
